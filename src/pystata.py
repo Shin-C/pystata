@@ -5,7 +5,7 @@ import string
 import numpy as np
 from IPython.core.display import display, HTML
 import pandas as pd
-from pyreg import OLS
+from src.pyreg import OLS
 
 # import configure
 import configparser
