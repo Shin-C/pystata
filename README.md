@@ -6,7 +6,7 @@
 # Stata required library (Install if you haven't done so)
 - ssc install reghdfe, ftools, esout
 
-
+----
 ## Example (See example.ipynb for more details)
 
 ```python
