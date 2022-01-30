@@ -3,6 +3,10 @@
 - 2. Use python to write stata do file following regression specifications
 - 3. Report regression results and re-read it into python 
 
+# Stata required library (Install if you haven't done so)
+- ssc install reghdfe, ftools, esout
+
+
 ## Example (See example.ipynb for more details)
 
 ```python
