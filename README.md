@@ -3,9 +3,9 @@
 - 2. Use python to write stata do file following regression specifications
 - 3. Report regression results and re-read it into python 
 
-# Important!: __You need to have Stata installed and Stata license__
+## Important!: __You need to have Stata installed and Stata license__
 
-# Install Stata library if you are estimating fixed effects (enter these command in Stata terminal)
+## Install Stata library if you are estimating fixed effects (enter these command in Stata terminal)
 - ssc install reghdfe, ftools, esout
 
 # Specified the Stata path so that Python can find it
