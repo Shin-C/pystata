@@ -9,6 +9,9 @@
 ## Specified the Stata path so that Python can find it
 Please specified the Stata path in the config.ini. Note that do not put GUI Stata path here
 
+## To do list
+update for Stata17 pystata to boost up run-time speed
+
 ----
 ## Example (See example.ipynb for more details)
 
