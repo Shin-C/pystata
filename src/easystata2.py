@@ -141,12 +141,11 @@ class summary_col():
 
         # setting
         self.nocache = True
-        
-        
+
         # this must be done after stata setup
         statadir = config.get('Directory', 'StataDir')
         statatype = config.get('Stata', 'edition')
-        stata_setup.config(statadir, statatype, splash=True)
+        stata_setup.config(statadir, statatype, splash=False)
 
     def _main_(self):
         # do file for each regression
@@ -309,7 +308,6 @@ class summary_col():
         #     kwargs['echo'] = True
 
         stata.run(self.do_script, kwargs)
-        # clean cache
         if self.nocache:
             self.cleancache
         else:
