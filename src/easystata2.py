@@ -137,7 +137,12 @@ class summary_col():
         self.title = ''  # table title caption
         self.desc = ''  # the table caption in description
         self.fx_space = {}
+        self.winsor_per = 1
 
+        # setting
+        self.nocache = True
+        
+        
         # this must be done after stata setup
         statadir = config.get('Directory', 'StataDir')
         statatype = config.get('Stata', 'edition')
@@ -169,10 +174,10 @@ class summary_col():
             # check if covariance cluster is given
             if isinstance(reg_input[2], list):
                 # if given, estimated with clustered standard errors
-                temp = pystata(reg_input[0], reg_input[1], 'clustered', **kwargs)
+                temp = pystata(reg_input[0], reg_input[1], 'clustered', winsor_per = self.winsor_per,**kwargs)
             else:
                 # else, estimated with robust standard errors
-                temp = pystata(reg_input[0], reg_input[1], 'robust', **kwargs)
+                temp = pystata(reg_input[0], reg_input[1], 'robust', winsor_per = self.winsor_per,**kwargs)
 
             temp.do_script = comments + temp.do_script
             do_file.append(temp.do_script)
@@ -304,7 +309,11 @@ class summary_col():
         #     kwargs['echo'] = True
 
         stata.run(self.do_script, kwargs)
-        # self.cleancache
+        # clean cache
+        if self.nocache:
+            self.cleancache
+        else:
+            pass
         self.results = open(self.outputDir + f'{self.name}.{self.outtype}').read()
 
     def _summary_(self):
