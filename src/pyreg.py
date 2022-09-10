@@ -16,7 +16,8 @@ class OLS(object):
         self.fx_dict = {}
 
         # winsorzation: default 1%
-        self.winsor_per = 1
+        self.winsor = self.kwargs.get("winsor_per")
+        self.winsor_per =  self.winsor if self.winsor else 1
 
         # Estimation method
         self.est_method = 'OLS'
