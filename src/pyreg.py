@@ -211,18 +211,21 @@ class OLS(object):
         :param percentile: winsorized percentage
         '''
         percentile = self.winsor_per
-        comment_head = f'* Winsor variable {var} by {percentile}% each tail \n'
-        winsor_temp = f'drop if {var} == . \n' \
-                      f'egen pLow = pctile({var}), p({percentile}) \n' \
-                      f'egen pHigh = pctile({var}), p({100 - percentile}) \n' \
-                      f'replace {var} = pLow if {var} <= pLow \n' \
-                      f'replace {var} = pHigh if {var} >= pHigh \n' \
-                      f'drop pLow pHigh \n'
-        comment_end = f'* End of winsorization of variable\n \n'
+        if percentile == 0:
+            self.winsor_script = ''
+        else:
+            comment_head = f'* Winsor variable {var} by {percentile}% each tail \n'
+            winsor_temp = f'drop if {var} == . \n' \
+                          f'egen pLow = pctile({var}), p({percentile}) \n' \
+                          f'egen pHigh = pctile({var}), p({100 - percentile}) \n' \
+                          f'replace {var} = pLow if {var} <= pLow \n' \
+                          f'replace {var} = pHigh if {var} >= pHigh \n' \
+                          f'drop pLow pHigh \n'
+            comment_end = f'* End of winsorization of variable\n \n'
 
-        # do script for winsoriztion
-        winsor_line = comment_head + winsor_temp + comment_end
-        self.winsor_script = winsor_line
+            # do script for winsoriztion
+            winsor_line = comment_head + winsor_temp + comment_end
+            self.winsor_script = winsor_line
 
     def _add_read(self):
         '''
