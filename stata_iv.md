@@ -17,4 +17,9 @@ ssc install ivreg2
 * Finally, install this package
 cap ado uninstall ivreghdfe
 net install ivreghdfe, from(https://raw.githubusercontent.com/sergiocorreia/ivreghdfe/master/src/)
+
+* The latest version requires ranktest
+ssc install ranktest
+
 ```
+
