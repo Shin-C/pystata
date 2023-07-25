@@ -138,6 +138,7 @@ class summary_col():
         self.desc = ''  # the table caption in description
         self.fx_space = {}
         self.winsor_per = 1
+        self.r2 = 'r2_a'
 
         # setting
         self.nocache = True
@@ -198,7 +199,7 @@ class summary_col():
 
     # generate comments
     def comments(self, reg, **kwargs):
-        n = 300
+        n = 500
         star_line = '*' * n + '\n'
         data = get_df_name(reg[0])
         reg = reg[1].strip()
@@ -328,8 +329,8 @@ class summary_col():
         _fx_label = ' '.join([f'"{k}"' for k in self.fx_space.keys()])
         _format_stata = ' '.join(['0' for i in range(0, len(self.fx_space.keys()))])
         self.summary = f'esttab {reg_list} using "$output/{self.name}.{self.outtype}", replace ' \
-                       'star(* 0.10 ** 0.05 *** 0.01) stat(' + _fx_stata + ' N r2_within tcov, ' \
-                                                                           'fmt(' + _format_stata + ' 0 3 0) label(' + _fx_label + \
+                       'star(* 0.10 ** 0.05 *** 0.01) stat(' + _fx_stata + ' N r2_a tcov, ' \
+                                                                           'fmt(' + _format_stata + ' 9.0fc 3 0) label(' + _fx_label + \
                        ' "Observations" "Adjusted R2" "SE Type")) noconstant' + modelname + orderlist.lower()
         self.do_script = self.do_script + comment + self.summary + '\n '
 
@@ -593,12 +594,14 @@ def getmodel(tex):
 
     # add line between table and statistics
     s_line = {f'{c}': '---' for c in print.columns.tolist()}
-    print = print.append(s_line, ignore_index=True)
+    print = pd.concat([print, pd.DataFrame([s_line])], ignore_index=True)
+    # print = print.append(s_line, ignore_index=True)
 
     stat = pd.DataFrame(stat_list, columns=models)
     stat['Var'] = stats_name
 
-    print = print.append(stat)
+    print = pd.concat([print, stat], ignore_index=True)
+    # print = print.append(stat)
     print[['Var'] + models]
 
     return print[['Var'] + models]
