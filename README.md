@@ -10,12 +10,13 @@
 Please specified the Stata path in the config.ini. Note that do not put GUI Stata path here
 
 ## To do list
-- [ ] update for Stata17 pystata API load pd.DataFrame function to boost up run-time speed
+- [x] update for Stata17 pystata API load pd.DataFrame function to boost up run-time speed
+- [ ] adept new pandas
 - [x] replace Stata run function (call in terminal) with Pystata default run function
 - [x] instrumental variable
 - [x] consolidated winsorization method
 - [ ] iPython magic method
-- [ ] report R-squared when estimating OLS 
+- [x] report R-squared when estimating OLS 
 - [ ] SM and LM, rebuild
 
 ----
