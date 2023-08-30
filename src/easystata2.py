@@ -330,7 +330,7 @@ class summary_col():
         _format_stata = ' '.join(['0' for i in range(0, len(self.fx_space.keys()))])
         self.summary = f'esttab {reg_list} using "$output/{self.name}.{self.outtype}", replace ' \
                        'star(* 0.10 ** 0.05 *** 0.01) stat(' + _fx_stata + ' N r2_a tcov, ' \
-                                                                           'fmt(' + _format_stata + ' 9.0fc 3 0) label(' + _fx_label + \
+                                                                           'fmt(' + _format_stata + ' "%9.0fc" 3 0) label(' + _fx_label + \
                        ' "Observations" "Adjusted R2" "SE Type")) noconstant' + modelname + orderlist.lower()
         self.do_script = self.do_script + comment + self.summary + '\n '
 
